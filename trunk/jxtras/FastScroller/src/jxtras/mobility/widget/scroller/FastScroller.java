@@ -5,9 +5,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Paint.Style;
+import android.graphics.Shader.TileMode;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
@@ -15,29 +18,23 @@ public class FastScroller extends android.view.View {
 
 	private static final String TAG = FastScroller.class.getSimpleName();
 
-	private final Paint paint = new Paint();
-	private final Bitmap knob = BitmapFactory.decodeResource(getResources(), R.drawable.scroller_normal);
-	private final Bitmap knob_pressed = BitmapFactory.decodeResource(getResources(), R.drawable.scroller_pressed);
+	private final Paint mPaint = new Paint();
+	private final Bitmap mThumb = BitmapFactory.decodeResource(getResources(), R.drawable.scroller_normal);
+	private final Bitmap mThumbPressed = BitmapFactory.decodeResource(getResources(), R.drawable.scroller_pressed);
 
-	private final float thumbHeight = knob.getHeight();
-	private final float thumbWidth = knob.getHeight();
-	private final float lineWidth = knob.getWidth() - 4;
+	private Drawable mTrackBackground = getResources().getDrawable(R.drawable.scrollbar_track);
 	
+	private final int mThumbHeight = mThumb.getHeight();
+	private final float mTrackWidth = mThumb.getWidth() - 4;
 
 	public interface AdjustmentListener {
 		void adjustmentValueChanged(int minValue);
 	}
 
-	public static class Insets {
-		public int top, left, bottom, right;
-	}
-
-	private Insets insets;
-
 	private int min, max;
 	private double normalizedValue = 0d;
 
-	private boolean mIsBeingDragged = false;
+	private boolean mIsThumbSelected = false;
 
 	private AdjustmentListener listener;
 
@@ -60,20 +57,6 @@ public class FastScroller extends android.view.View {
 		this.min = min;
 		this.max = max;
 		this.setValue(value);
-
-		this.insets = new Insets();
-		this.insets.top = 0;
-		this.insets.left = 2;
-		this.insets.bottom = 0;
-		this.insets.right = 0;
-	}
-
-	public Insets getInsets() {
-		return this.insets;
-	}
-
-	public void setInsets(Insets insets) {
-		this.insets = insets;
 	}
 
 	public int getMin() {
@@ -83,7 +66,11 @@ public class FastScroller extends android.view.View {
 	public int getMax() {
 		return max;
 	}
-	
+
+	public void setMin(int min) {
+		this.min = min;
+	}
+
 	public void setMax(int max) {
 		this.max = max;
 	}
@@ -102,14 +89,16 @@ public class FastScroller extends android.view.View {
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
+		float y = event.getY();
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
-			mIsBeingDragged = this.isInThumbRange(event.getY(), normalizedValue);
+			mIsThumbSelected = this.isThumbSelected(y, normalizedValue);
+			this.normalizedValue = screenToNormalized(y);
 			invalidate();
 			break;
 		case MotionEvent.ACTION_MOVE:
-			if (mIsBeingDragged) {
-				setNormalizedValue(screenToNormalized(event.getY()));
+			if (mIsThumbSelected) {
+				setNormalizedValue(screenToNormalized(y));
 				if (listener != null) {
 					listener.adjustmentValueChanged(getValue());
 				}
@@ -117,7 +106,7 @@ public class FastScroller extends android.view.View {
 			break;
 		case MotionEvent.ACTION_UP:
 		case MotionEvent.ACTION_CANCEL:
-			mIsBeingDragged = false;
+			mIsThumbSelected = false;
 			invalidate();
 			if (listener != null) {
 				listener.adjustmentValueChanged(getValue());
@@ -136,7 +125,7 @@ public class FastScroller extends android.view.View {
 		if (MeasureSpec.UNSPECIFIED != MeasureSpec.getMode(heightMeasureSpec)) {
 			height = MeasureSpec.getSize(heightMeasureSpec);
 		}
-		int width = knob.getWidth() - 8;
+		int width = mThumb.getWidth() - 8;
 		if (MeasureSpec.UNSPECIFIED != MeasureSpec.getMode(widthMeasureSpec)) {
 			width = Math.min(width, MeasureSpec.getSize(widthMeasureSpec));
 		}
@@ -147,20 +136,21 @@ public class FastScroller extends android.view.View {
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 		// draw seek bar background line
-		RectF rect = new RectF(insets.left, insets.top, insets.left + lineWidth, getHeight() - insets.top - insets.bottom);
-		paint.setStyle(Style.FILL);
-		paint.setColor(Color.GRAY);
-		//canvas.drawRect(rect, paint);
+		//RectF rect = new RectF(0, 0, mTrackWidth, getHeight());
+		//mPaint.setStyle(Style.FILL);
+		//mPaint.setColor(Color.GRAY);
+		//mPaint.setShader(new LinearGradient(0, 0, getWidth(), 0, Color.parseColor("#505050"), Color.parseColor("#C0C0C0"), TileMode.CLAMP));
+		//canvas.drawRect(rect, mPaint);
 		// draw thumb
-		drawThumb(normalizedToScreen(normalizedValue), mIsBeingDragged, canvas);
+		drawThumb(normalizedToScreen(normalizedValue), mIsThumbSelected, canvas);
 	}
 
 	private void drawThumb(float screenCoord, boolean pressed, Canvas canvas) {
-		canvas.drawBitmap(pressed ? knob_pressed : knob, 0 - 8, screenCoord - thumbHeight * 0.5f, paint);
+		canvas.drawBitmap(pressed ? mThumbPressed : mThumb, 0 - 8, screenCoord - mThumbHeight * 0.5f, mPaint);
 	}
 
-	private boolean isInThumbRange(float touchY, double normalizedThumbValue) {
-		return Math.abs(touchY - normalizedToScreen(normalizedThumbValue)) <= thumbHeight * 0.5f;
+	private boolean isThumbSelected(float touchY, double normalizedThumbValue) {
+		return Math.abs(touchY - normalizedToScreen(normalizedThumbValue)) <= mThumbHeight * 0.5f;
 	}
 
 	private void setNormalizedValue(double value) {
@@ -180,17 +170,17 @@ public class FastScroller extends android.view.View {
 	}
 
 	private float normalizedToScreen(double normalized) {
-		return (float) (insets.top + thumbHeight * 0.5f + normalized * (getHeight() - insets.top - insets.bottom - thumbHeight));
+		return (float) (mThumbHeight * 0.5f + normalized * (getHeight() - mThumbHeight));
 	}
 
 	private double screenToNormalized(float screenCoord) {
 		int height = getHeight();
-		if (height <= insets.top + insets.bottom + thumbHeight) {
+		if (height <= mThumbHeight) {
 			// prevent division by zero, simply return 0.
 			return 0d;
 		}
 		else {
-			double result = (screenCoord - insets.top - thumbHeight * 0.5f) / (height - insets.top - insets.bottom - thumbHeight);
+			double result = (screenCoord - mThumbHeight * 0.5f) / (height - mThumbHeight);
 			return Math.min(1d, Math.max(0d, result));
 		}
 	}
