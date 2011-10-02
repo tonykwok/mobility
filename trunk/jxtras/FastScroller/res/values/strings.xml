@@ -2,4 +2,6 @@
 <resources>
 	<string name="app_name">Fast Scroller Demo</string>
 	<string name="scrollbar_text">The Quick Brown Fox Jumps Over The Lazy Dog</string>
+	<string name="first_line_text">You have reached the first line now</string>
+	<string name="last_line_text">You have reached the last line now</string>
 </resources>
