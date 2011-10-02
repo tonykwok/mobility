@@ -18,7 +18,139 @@
 			<TextView 
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content" 
-				android:text="the first line" />
+				android:text="@string/first_line_text" />
+			<TextView 
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" 
+				android:text="@string/scrollbar_text" />
+			<TextView 
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" 
+				android:text="@string/scrollbar_text" />
+			<TextView 
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" 
+				android:text="@string/scrollbar_text" />
+			<TextView 
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" 
+				android:text="@string/scrollbar_text" />
+			<TextView 
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" 
+				android:text="@string/scrollbar_text" />
+			<TextView 
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" 
+				android:text="@string/scrollbar_text" />
+			<TextView 
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" 
+				android:text="@string/scrollbar_text" />
+			<TextView 
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" 
+				android:text="@string/scrollbar_text" />
+			<TextView 
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" 
+				android:text="@string/scrollbar_text" />
+			<TextView 
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" 
+				android:text="@string/scrollbar_text" />
+			<TextView 
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" 
+				android:text="@string/scrollbar_text" />
+			<TextView 
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" 
+				android:text="@string/scrollbar_text" />
+			<TextView 
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" 
+				android:text="@string/scrollbar_text" />
+			<TextView 
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" 
+				android:text="@string/scrollbar_text" />
+			<TextView 
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" 
+				android:text="@string/scrollbar_text" />
+			<TextView 
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" 
+				android:text="@string/scrollbar_text" />
+			<TextView 
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" 
+				android:text="@string/scrollbar_text" />
+			<TextView 
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" 
+				android:text="@string/scrollbar_text" />
+			<TextView 
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" 
+				android:text="@string/scrollbar_text" />
+			<TextView 
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" 
+				android:text="@string/scrollbar_text" />
+			<TextView 
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" 
+				android:text="@string/scrollbar_text" />
+			<TextView 
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" 
+				android:text="@string/scrollbar_text" />
+			<TextView 
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" 
+				android:text="@string/scrollbar_text" />
+			<TextView 
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" 
+				android:text="@string/scrollbar_text" />
+			<TextView 
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" 
+				android:text="@string/scrollbar_text" />
+			<TextView 
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" 
+				android:text="@string/scrollbar_text" />
+			<TextView 
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" 
+				android:text="@string/scrollbar_text" />
+			<TextView 
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" 
+				android:text="@string/scrollbar_text" />
+			<TextView 
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" 
+				android:text="@string/scrollbar_text" />
+			<TextView 
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" 
+				android:text="@string/scrollbar_text" />
+			<TextView 
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" 
+				android:text="@string/scrollbar_text" />
+			<TextView 
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" 
+				android:text="@string/scrollbar_text" />
+			<TextView 
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" 
+				android:text="@string/scrollbar_text" />
 			<TextView 
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content" 
@@ -154,7 +286,7 @@
 			<TextView 
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content" 
-				android:text="the last line" />
+				android:text="@string/first_line_text" />
 		</LinearLayout>
 	</ScrollView>
 
