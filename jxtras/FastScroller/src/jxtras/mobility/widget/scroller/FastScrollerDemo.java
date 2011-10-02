@@ -13,19 +13,18 @@ import android.widget.ScrollView;
 public class FastScrollerDemo extends Activity {
 
 	private ViewGroup vg;
-	
+
 	private FastScroller bar;
-	
+
 	private ScrollView sv;
-	
-	private int maxHeight;
+
+	private int maxScrollableDistance;
 
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		// create RangeSeekBar as Integer range between 20 and 75
 		bar = (FastScroller) this.findViewById(R.id.adj);
 		sv = (ScrollView) this.findViewById(R.id.sv);
 
@@ -37,10 +36,10 @@ public class FastScrollerDemo extends Activity {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_MOVE) {
-					int y = ((ScrollView)v).getScrollY();
+					int y = ((ScrollView) v).getScrollY();
 					Log.d("AdjustmentScroller", "y value = " + y);
 					if (y != bar.getValue()) {
-						bar.setValue(y);						
+						bar.setValue(y);
 					}
 				}
 				return false;
@@ -50,19 +49,18 @@ public class FastScrollerDemo extends Activity {
 		bar.setAdjustmentListener(new AdjustmentListener() {
 			@Override
 			public void adjustmentValueChanged(int value) {
-//				int height = vg.getHeight() - sv.getHeight();
-//
-//				final double step = Math.ceil(1.0D * height / bar.getMax());
-				
-				maxHeight = vg.getHeight() - sv.getHeight();
-				if (maxHeight != bar.getMax()) {
-					bar.setMax(maxHeight);
-				}
-				// handle changed range values
 				Log.i("AdjustmentScroller", "User selected value =" + value);
 				sv.smoothScrollTo(0, value);
 			}
 		});
 	}
-	
+
+	@Override
+	public void onWindowFocusChanged (boolean hasFocus) {
+		super.onWindowFocusChanged(hasFocus);
+		maxScrollableDistance = vg.getHeight() - sv.getHeight();
+		if (maxScrollableDistance != bar.getMax()) {
+			bar.setMax(maxScrollableDistance);
+		}
+	}
 }
