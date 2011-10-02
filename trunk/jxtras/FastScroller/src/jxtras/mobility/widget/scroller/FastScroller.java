@@ -21,8 +21,6 @@ public class FastScroller extends android.view.View {
 	private final Paint mPaint = new Paint();
 	private final Bitmap mThumb = BitmapFactory.decodeResource(getResources(), R.drawable.scroller_normal);
 	private final Bitmap mThumbPressed = BitmapFactory.decodeResource(getResources(), R.drawable.scroller_pressed);
-
-	private Drawable mTrackBackground = getResources().getDrawable(R.drawable.scrollbar_track);
 	
 	private final int mThumbHeight = mThumb.getHeight();
 	private final float mTrackWidth = mThumb.getWidth() - 4;
@@ -93,25 +91,22 @@ public class FastScroller extends android.view.View {
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
 			mIsThumbSelected = this.isThumbSelected(y, normalizedValue);
-			this.normalizedValue = screenToNormalized(y);
-			invalidate();
+			setNormalizedValue(screenToNormalized(y));
 			break;
 		case MotionEvent.ACTION_MOVE:
 			if (mIsThumbSelected) {
-				setNormalizedValue(screenToNormalized(y));
-				if (listener != null) {
-					listener.adjustmentValueChanged(getValue());
-				}
+				setNormalizedValue(screenToNormalized(y));				
 			}
 			break;
 		case MotionEvent.ACTION_UP:
 		case MotionEvent.ACTION_CANCEL:
-			mIsThumbSelected = false;
-			invalidate();
-			if (listener != null) {
-				listener.adjustmentValueChanged(getValue());
-			}
+			mIsThumbSelected = false;			
 			break;
+		}
+		
+		invalidate();
+		if (listener != null) {
+			listener.adjustmentValueChanged(getValue());
 		}
 		return true;
 	}
