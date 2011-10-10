@@ -29,7 +29,7 @@
  */
 package jxtras.mobility.widget.scroller;
 
-import jxtras.mobility.widget.scroller.FastScroller.AdjustmentListener;
+import jxtras.mobility.widget.scroller.FastScroller.OnAdjustListener;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
@@ -75,9 +75,9 @@ public class FastScrollerDemo extends Activity {
 			}
 		});
 
-		bar.setAdjustmentListener(new AdjustmentListener() {
+		bar.setAdjustmentListener(new OnAdjustListener() {
 			@Override
-			public void adjustmentValueChanged(int value) {
+			public void onAdjustmentValueChanged(int value) {
 				Log.i("AdjustmentScroller", "User selected value =" + value);
 				sv.smoothScrollTo(0, value);
 			}
