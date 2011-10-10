@@ -6,7 +6,7 @@
 	
 	<ScrollView 
 		android:id="@+id/sv" 
-		android:layout_width="wrap_content"
+		android:layout_width="0dip"
 		android:layout_height="match_parent"
 		android:layout_weight="1" >
 		
