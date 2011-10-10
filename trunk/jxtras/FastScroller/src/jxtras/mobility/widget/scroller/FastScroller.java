@@ -48,8 +48,8 @@ public class FastScroller extends android.view.View {
 	private final int mThumbHeight = mThumb.getHeight();
 	private final float mTrackWidth = mThumb.getWidth() - 4;
 
-	public interface AdjustmentListener {
-		void adjustmentValueChanged(int minValue);
+	public interface OnAdjustListener {
+		void onAdjustmentValueChanged(int minValue);
 	}
 
 	private int min, max;
@@ -57,7 +57,7 @@ public class FastScroller extends android.view.View {
 
 	private boolean mIsThumbSelected = false;
 
-	private AdjustmentListener listener;
+	private OnAdjustListener listener;
 
 	public FastScroller(Context context) {
 		super(context);
@@ -104,7 +104,7 @@ public class FastScroller extends android.view.View {
 		setNormalizedValue(valueToNormailzed(value));
 	}
 
-	public void setAdjustmentListener(AdjustmentListener listener) {
+	public void setAdjustmentListener(OnAdjustListener listener) {
 		this.listener = listener;
 	}
 
@@ -129,7 +129,7 @@ public class FastScroller extends android.view.View {
 		
 		invalidate();
 		if (listener != null) {
-			listener.adjustmentValueChanged(getValue());
+			listener.onAdjustmentValueChanged(getValue());
 		}
 		return true;
 	}
