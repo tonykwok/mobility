@@ -47,10 +47,10 @@ public class FastScroller extends android.view.View {
 	private static final String TAG = FastScroller.class.getSimpleName();
 
 	private Paint mPaint;
-	//private final Bitmap mThumb = BitmapFactory.decodeResource(getResources(), R.drawable.scrollbar_thumb_normal);
-	//private final Bitmap mThumbPressed = BitmapFactory.decodeResource(getResources(), R.drawable.scrollbar_thumb_pressed);
+	private final Bitmap mThumb = BitmapFactory.decodeResource(getResources(), R.drawable.scrollbar_thumb_normal);
+	private final Bitmap mThumbPressed = BitmapFactory.decodeResource(getResources(), R.drawable.scrollbar_thumb_pressed);
 	
-	private final int mThumbHeight = 80;//mThumb.getHeight();
+	private final int mThumbHeight = 50;//mThumb.getHeight();
 	private final int mTrackWidth = 15;//mThumb.getWidth() - 4;
 	private final int radius = (int) (mTrackWidth * 0.5f);
 
