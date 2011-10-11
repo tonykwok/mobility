@@ -46,23 +46,23 @@ public class FastScroller extends android.view.View {
 
 	private static final String TAG = FastScroller.class.getSimpleName();
 
-	private final Paint mPaint = new Paint();
-	private final Bitmap mThumb = BitmapFactory.decodeResource(getResources(), R.drawable.scrollbar_thumb_normal);
-	private final Bitmap mThumbPressed = BitmapFactory.decodeResource(getResources(), R.drawable.scrollbar_thumb_pressed);
+	private Paint mPaint;
+	//private final Bitmap mThumb = BitmapFactory.decodeResource(getResources(), R.drawable.scrollbar_thumb_normal);
+	//private final Bitmap mThumbPressed = BitmapFactory.decodeResource(getResources(), R.drawable.scrollbar_thumb_pressed);
 	
-	private final int mThumbHeight = mThumb.getHeight();
-	private final float mTrackWidth = mThumb.getWidth() - 4;
+	private final int mThumbHeight = 80;//mThumb.getHeight();
+	private final int mTrackWidth = 15;//mThumb.getWidth() - 4;
+	private final int radius = (int) (mTrackWidth * 0.5f);
 
-	public interface OnAdjustListener {
+	public interface AdjustmentListener {
 		void onAdjustmentValueChanged(int minValue);
 	}
 
 	private int min, max;
 	private double normalizedValue = 0d;
-
 	private boolean mIsThumbSelected = false;
 
-	private OnAdjustListener listener;
+	private AdjustmentListener listener;
 
 	public FastScroller(Context context) {
 		super(context);
@@ -80,6 +80,7 @@ public class FastScroller extends android.view.View {
 	}
 
 	public void init(int min, int max, int value) {
+		this.setBackgroundColor(Color.BLACK);
 		this.min = min;
 		this.max = max;
 		this.setValue(value);
@@ -109,7 +110,7 @@ public class FastScroller extends android.view.View {
 		setNormalizedValue(valueToNormailzed(value));
 	}
 
-	public void setAdjustmentListener(OnAdjustListener listener) {
+	public void setAdjustmentListener(AdjustmentListener listener) {
 		this.listener = listener;
 	}
 
@@ -139,16 +140,13 @@ public class FastScroller extends android.view.View {
 		return true;
 	}
 
-	/**
-	 * Ensures correct size of the widget.
-	 */
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		int height = 200;
 		if (MeasureSpec.UNSPECIFIED != MeasureSpec.getMode(heightMeasureSpec)) {
 			height = MeasureSpec.getSize(heightMeasureSpec);
 		}
-		int width = mThumb.getWidth() - 8;
+		int width = mTrackWidth;
 		if (MeasureSpec.UNSPECIFIED != MeasureSpec.getMode(widthMeasureSpec)) {
 			width = Math.min(width, MeasureSpec.getSize(widthMeasureSpec));
 		}
@@ -158,18 +156,30 @@ public class FastScroller extends android.view.View {
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
-		// draw seek bar background line
-		RectF rect = new RectF(0, 0, mTrackWidth, getHeight());
-		mPaint.setStyle(Style.FILL);
-		mPaint.setColor(Color.GRAY);
-		mPaint.setShader(new LinearGradient(0, 0, getWidth(), 0, Color.parseColor("#505050"), Color.parseColor("#C0C0C0"), TileMode.CLAMP));
-		canvas.drawRect(rect, mPaint);
-		// draw thumb
+		if (mPaint == null) {
+			mPaint = new Paint();
+			mPaint.setAntiAlias(true);
+			mPaint.setStyle(Style.FILL);
+		}
+		// draw scroll bar background
+		mPaint.setShader(new LinearGradient(0, 2, mTrackWidth, 2, Color.parseColor("#505050"), Color.parseColor("#C0C0C0"), TileMode.CLAMP));
+		RectF rect = new RectF(0, 2, mTrackWidth, getHeight());
+		canvas.drawRoundRect(rect, radius, radius, mPaint);
+		// draw scroll bar thumb
 		drawThumb(normalizedToScreen(normalizedValue), mIsThumbSelected, canvas);
 	}
 
 	private void drawThumb(float screenCoord, boolean pressed, Canvas canvas) {
-		canvas.drawBitmap(pressed ? mThumbPressed : mThumb, 0 - 8, screenCoord - mThumbHeight * 0.5f, mPaint);
+		int y = (int) (screenCoord - mThumbHeight * 0.5f);
+		//canvas.drawBitmap(pressed ? mThumbPressed : mThumb, 0 - 8, screenCoord - mThumbHeight * 0.5f, mPaint);
+		RectF rect = new RectF(0, 2 + y, mTrackWidth, y + 50);
+		if (pressed) {
+			mPaint.setShader(new LinearGradient(0, 2 + y, mTrackWidth, 2 + y, Color.parseColor("#2233FF"), Color.parseColor("#2280FF"), TileMode.CLAMP));
+			canvas.drawRoundRect(rect, radius, radius, mPaint);
+		} else {
+			mPaint.setShader(new LinearGradient(0, 2 + y, mTrackWidth, 2 + y, Color.parseColor("#2244FF"), Color.parseColor("#2280FF"), TileMode.CLAMP));
+			canvas.drawRoundRect(rect, radius, radius, mPaint);
+		}
 	}
 
 	private boolean isThumbSelected(float touchY, double normalizedThumbValue) {
