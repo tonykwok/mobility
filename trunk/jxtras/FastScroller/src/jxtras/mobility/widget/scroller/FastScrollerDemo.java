@@ -47,7 +47,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AbsListView.OnScrollListener;
 
-public class FastScrollerDemo2 extends Activity {
+public class FastScrollerDemo extends Activity {
 
 	private FastScroller fastScroller;
 	private ListView playList;	
