@@ -3,7 +3,7 @@
       android:versionCode="1"
       android:versionName="1.0" package="jxtras.mobility.widget.scroller">
     <application android:icon="@drawable/icon" android:label="@string/app_name">
-        <activity android:name=".FastScrollerDemo"
+        <activity android:name=".FastScrollerDemo2"
                   android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
