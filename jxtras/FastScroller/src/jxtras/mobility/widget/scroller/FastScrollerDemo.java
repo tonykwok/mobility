@@ -31,7 +31,7 @@ package jxtras.mobility.widget.scroller;
 
 import java.util.ArrayList;
 
-import jxtras.mobility.widget.scroller.FastScroller.OnAdjustListener;
+import jxtras.mobility.widget.scroller.FastScroller.AdjustmentListener;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -89,7 +89,7 @@ public class FastScrollerDemo extends Activity {
 			
 		});
 		
-		fastScroller.setAdjustmentListener(new OnAdjustListener() {
+		fastScroller.setAdjustmentListener(new AdjustmentListener() {
 			@Override
 			public void onAdjustmentValueChanged(int value) {
 				int position = value / itemHeight;
