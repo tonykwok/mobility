@@ -33,7 +33,12 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
+import android.graphics.RectF;
+import android.graphics.Paint.Style;
+import android.graphics.Shader.TileMode;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
@@ -42,8 +47,8 @@ public class FastScroller extends android.view.View {
 	private static final String TAG = FastScroller.class.getSimpleName();
 
 	private final Paint mPaint = new Paint();
-	private final Bitmap mThumb = BitmapFactory.decodeResource(getResources(), R.drawable.scroller_normal);
-	private final Bitmap mThumbPressed = BitmapFactory.decodeResource(getResources(), R.drawable.scroller_pressed);
+	private final Bitmap mThumb = BitmapFactory.decodeResource(getResources(), R.drawable.scrollbar_thumb_normal);
+	private final Bitmap mThumbPressed = BitmapFactory.decodeResource(getResources(), R.drawable.scrollbar_thumb_pressed);
 	
 	private final int mThumbHeight = mThumb.getHeight();
 	private final float mTrackWidth = mThumb.getWidth() - 4;
@@ -154,11 +159,11 @@ public class FastScroller extends android.view.View {
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 		// draw seek bar background line
-		//RectF rect = new RectF(0, 0, mTrackWidth, getHeight());
-		//mPaint.setStyle(Style.FILL);
-		//mPaint.setColor(Color.GRAY);
-		//mPaint.setShader(new LinearGradient(0, 0, getWidth(), 0, Color.parseColor("#505050"), Color.parseColor("#C0C0C0"), TileMode.CLAMP));
-		//canvas.drawRect(rect, mPaint);
+		RectF rect = new RectF(0, 0, mTrackWidth, getHeight());
+		mPaint.setStyle(Style.FILL);
+		mPaint.setColor(Color.GRAY);
+		mPaint.setShader(new LinearGradient(0, 0, getWidth(), 0, Color.parseColor("#505050"), Color.parseColor("#C0C0C0"), TileMode.CLAMP));
+		canvas.drawRect(rect, mPaint);
 		// draw thumb
 		drawThumb(normalizedToScreen(normalizedValue), mIsThumbSelected, canvas);
 	}
