@@ -120,19 +120,19 @@ public class FastScrollerDemo extends Activity {
 
 
 	private static class Song {
-		String mName;
-		String mNumber;
+		String album;
+		String artist;
 
-		public Song(final String name, final String number) {
-			mName = name;
-			mNumber = number;
+		public Song(final String album, final String artist) {
+			this.album = album;
+			this.artist = artist;
 		}
 	}
 
 	private ArrayList<Song> createSongList(final int size) {
 		final ArrayList<Song> songs = new ArrayList<Song>();
 		for (int i = 0; i < size; i++) {
-			songs.add(new Song("Contact Number " + i, "+86(0)" + (int) (1000000 + 9000000 * Math.random())));
+			songs.add(new Song("Classic Music #" + i, "Jacky Zhang"));
 		}
 		return songs;
 	}
@@ -153,13 +153,13 @@ public class FastScrollerDemo extends Activity {
 				view = LayoutInflater.from(getContext()).inflate(R.layout.list_item, null);
 			}
 			
-			final TextView name = (TextView) view.findViewById(R.id.contact_name);
-			name.setText(getItem(position).mName);
+			final TextView name = (TextView) view.findViewById(R.id.album_name);
+			name.setText(getItem(position).album);
 
-			final TextView number = (TextView) view.findViewById(R.id.contact_number);
-			number.setText(getItem(position).mNumber);
+			final TextView number = (TextView) view.findViewById(R.id.artist_name);
+			number.setText(getItem(position).artist);
 
-			final ImageView photo = (ImageView) view.findViewById(R.id.contact_photo);
+			final ImageView photo = (ImageView) view.findViewById(R.id.art_work_image);
 			photo.setImageDrawable(artworkImage);
 
 			return view;
