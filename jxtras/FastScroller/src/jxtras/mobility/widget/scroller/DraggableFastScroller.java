@@ -79,8 +79,8 @@ public class DraggableFastScroller extends android.view.View {
 
 	public void init(Context context) {
 		final DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-		this.thumbSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 80f, metrics);
-		this.trackSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50f, metrics);
+		this.thumbSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 75f, metrics);
+		this.trackSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 25f, metrics);
 		this.radius = (int) (trackSize * 0.5f);
 		this.setBackgroundColor(Color.BLACK);
 		this.min = 0;
@@ -166,8 +166,8 @@ public class DraggableFastScroller extends android.view.View {
 			mPaint.setStyle(Style.FILL);
 		}
 		// draw scroll bar background
-		mPaint.setShader(new LinearGradient(0, 2, trackSize, 2, Color.parseColor("#505050"), Color.parseColor("#C0C0C0"), TileMode.CLAMP));
-		RectF rect = new RectF(0, 2, trackSize, getHeight());
+		mPaint.setShader(new LinearGradient(0, 0, trackSize, 0, Color.parseColor("#505050"), Color.parseColor("#C0C0C0"), TileMode.CLAMP));
+		RectF rect = new RectF(0, 0, trackSize, getHeight());
 		canvas.drawRoundRect(rect, radius, radius, mPaint);
 		// draw scroll bar thumb
 		drawThumb(normalizedToScreen(normalizedValue), mIsThumbSelected, canvas);
@@ -175,13 +175,13 @@ public class DraggableFastScroller extends android.view.View {
 
 	private void drawThumb(float screenCoord, boolean pressed, Canvas canvas) {
 		int y = (int) (screenCoord - thumbSize * 0.5f);
-		RectF rect = new RectF(0, 2 + y, trackSize, y + 50);
+		RectF rect = new RectF(0, y, trackSize, y + thumbSize);
 		if (pressed) {
-			mPaint.setShader(new LinearGradient(0, 2 + y, trackSize, 2 + y, Color.parseColor("#2233FF"), Color.parseColor("#2280FF"), TileMode.CLAMP));
+			mPaint.setShader(new LinearGradient(0, y, trackSize, y, Color.parseColor("#2233FF"), Color.parseColor("#2280FF"), TileMode.CLAMP));
 			canvas.drawRoundRect(rect, radius, radius, mPaint);
 		}
 		else {
-			mPaint.setShader(new LinearGradient(0, 2 + y, trackSize, 2 + y, Color.parseColor("#2244FF"), Color.parseColor("#2280FF"), TileMode.CLAMP));
+			mPaint.setShader(new LinearGradient(0, y, trackSize, y, Color.parseColor("#2244FF"), Color.parseColor("#2280FF"), TileMode.CLAMP));
 			canvas.drawRoundRect(rect, radius, radius, mPaint);
 		}
 	}
