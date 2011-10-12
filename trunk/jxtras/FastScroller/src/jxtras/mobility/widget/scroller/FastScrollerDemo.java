@@ -31,7 +31,7 @@ package jxtras.mobility.widget.scroller;
 
 import java.util.ArrayList;
 
-import jxtras.mobility.widget.scroller.FastScroller.AdjustmentListener;
+import jxtras.mobility.widget.scroller.DraggableFastScroller.AdjustmentListener;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -49,7 +49,7 @@ import android.widget.AbsListView.OnScrollListener;
 
 public class FastScrollerDemo extends Activity {
 
-	private FastScroller fastScroller;
+	private DraggableFastScroller fastScroller;
 	private ListView playList;	
 	private int itemHeight;
 
@@ -58,7 +58,7 @@ public class FastScrollerDemo extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.playlist);
-		fastScroller = (FastScroller) this.findViewById(R.id.fast_scroller);
+		fastScroller = (DraggableFastScroller) this.findViewById(R.id.fast_scroller);
 		playList = (ListView) this.findViewById(R.id.play_list);
 
 		final ArrayList<Song> contacts = createSongList(20);
