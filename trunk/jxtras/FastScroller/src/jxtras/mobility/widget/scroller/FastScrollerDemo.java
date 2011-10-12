@@ -40,8 +40,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -51,6 +53,7 @@ public class FastScrollerDemo extends Activity {
 
 	private DraggableFastScroller fastScroller;
 	private ListView playList;	
+	private Button btnArrawUp, btnArrawDown;
 	private int itemHeight;
 
 	/** Called when the activity is first created. */
@@ -60,6 +63,8 @@ public class FastScrollerDemo extends Activity {
 		setContentView(R.layout.playlist);
 		fastScroller = (DraggableFastScroller) this.findViewById(R.id.fast_scroller);
 		playList = (ListView) this.findViewById(R.id.play_list);
+		btnArrawUp = (Button) this.findViewById(R.id.arrawUpBtn);
+		btnArrawDown = (Button) this.findViewById(R.id.arrawDownBtn);
 
 		final ArrayList<Song> contacts = createSongList(20);
 		playList.setAdapter(new MyAdapter(this, contacts));
@@ -92,14 +97,41 @@ public class FastScrollerDemo extends Activity {
 		fastScroller.setAdjustmentListener(new AdjustmentListener() {
 			@Override
 			public void onAdjustmentValueChanged(int value) {
-				int position = value / itemHeight;
-				int y = value % itemHeight;
-				Log.i("ddd", "value = " + value);
-				Log.i("ddd", "position = " + position);
-				Log.i("ddd", "y = " + y);
-				playList.setSelectionFromTop(position, -y);
+				scrollList(value);
 			}
 		});
+		
+		final int unitIncrement = 10;
+		btnArrawUp.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				int offset = fastScroller.getValue() - unitIncrement;
+				if (offset >= 0) {
+					fastScroller.setValue(offset);
+					scrollList(fastScroller.getValue());	
+				}
+			}			
+		});
+		
+		btnArrawDown.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				int offset = fastScroller.getValue() + unitIncrement;
+				if (offset <= fastScroller.getMax()) {
+					fastScroller.setValue(offset);
+					scrollList(fastScroller.getValue());	
+				}
+			}
+		});
+	}
+	
+	private void scrollList(int value) {
+		int position = value / itemHeight;
+		int y = value % itemHeight;
+		Log.i("ddd", "value = " + value);
+		Log.i("ddd", "position = " + position);
+		Log.i("ddd", "y = " + y);
+		playList.setSelectionFromTop(position, -y);
 	}
 	
 	@Override
