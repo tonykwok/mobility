@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
+  
   <ListView
   	android:id="@+id/play_list"
   	android:layout_width="wrap_content"
   	android:layout_height="match_parent"
   	android:layout_gravity="left" />
-  <jxtras.mobility.widget.scroller.FastScroller
+  
+  <jxtras.mobility.widget.scroller.DraggableFastScroller
   	android:id="@+id/fast_scroller"
   	android:layout_width="wrap_content"
   	android:layout_height="fill_parent"
   	android:layout_gravity="right" />
+
 </merge>
