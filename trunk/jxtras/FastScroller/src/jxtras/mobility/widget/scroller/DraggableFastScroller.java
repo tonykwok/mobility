@@ -144,7 +144,7 @@ public class DraggableFastScroller extends android.view.View {
 
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		int width = this.thumbSize;
+		int width = this.trackSize;
 		int height = MeasureSpec.getSize(heightMeasureSpec);
 		int specMode = MeasureSpec.getMode(widthMeasureSpec);
 		int specSize = MeasureSpec.getSize(widthMeasureSpec);
