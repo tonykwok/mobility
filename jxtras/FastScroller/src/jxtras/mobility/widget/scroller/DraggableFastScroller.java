@@ -177,11 +177,11 @@ public class DraggableFastScroller extends android.view.View {
 		int y = (int) (screenCoord - thumbSize * 0.5f);
 		RectF rect = new RectF(0, y, trackSize, y + thumbSize);
 		if (pressed) {
-			mPaint.setShader(new LinearGradient(0, y, trackSize, y, Color.parseColor("#2233FF"), Color.parseColor("#2280FF"), TileMode.CLAMP));
+			mPaint.setShader(new LinearGradient(0, y, trackSize, y, Color.parseColor("#ffc579"), Color.parseColor("#fb9d23"), TileMode.CLAMP));
 			canvas.drawRoundRect(rect, radius, radius, mPaint);
 		}
 		else {
-			mPaint.setShader(new LinearGradient(0, y, trackSize, y, Color.parseColor("#2244FF"), Color.parseColor("#2280FF"), TileMode.CLAMP));
+			mPaint.setShader(new LinearGradient(0, y, trackSize, y, Color.parseColor("#3344ff"), Color.parseColor("#3380ff"), TileMode.CLAMP));
 			canvas.drawRoundRect(rect, radius, radius, mPaint);
 		}
 	}
