@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+	   android:layout_width="fill_parent" 
+	   android:layout_height="fill_parent">
+	
+	<LinearLayout 
+		android:orientation="vertical"
+		android:layout_width="fill_parent" 
+		android:layout_height="fill_parent">
+		
+		<TextView 
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content" 
+			android:text="@string/hello" />
+	</LinearLayout>
+	
+	<jxtras.mobility.xpress.view.ComposerLayout
+		android:id="@+id/composer" 
+		android:clipChildren="false"
+		android:clipToPadding="false" 
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent" 
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentBottom="true">
+		
+		<jxtras.mobility.xpress.view.InOutRelativeLayout
+			android:id="@+id/composer_buttons_wrapper" 
+			android:clipChildren="false"
+			android:clipToPadding="false" 
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent" 
+			android:layout_alignParentLeft="true"
+			android:layout_alignParentBottom="true">
+			
+			<jxtras.mobility.xpress.view.InOutImageButton
+				android:id="@+id/composer_button_photo" 
+				android:background="@drawable/composer_camera"
+				android:visibility="gone" 
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" 
+				android:layout_marginLeft="16.0px"
+				android:layout_marginBottom="213.0px"
+				android:layout_alignParentLeft="true"
+				android:layout_alignParentBottom="true" />
+			
+			<jxtras.mobility.xpress.view.InOutImageButton
+				android:id="@+id/composer_button_people" 
+				android:background="@drawable/composer_with"
+				android:visibility="gone" 
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" 
+				android:layout_marginLeft="78.0px"
+				android:layout_marginBottom="203.0px"
+				android:layout_alignParentLeft="true"
+				android:layout_alignParentBottom="true" />
+			
+			<jxtras.mobility.xpress.view.InOutImageButton
+				android:id="@+id/composer_button_place" 
+				android:background="@drawable/composer_place"
+				android:visibility="gone" 
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" 
+				android:layout_marginLeft="134.0px"
+				android:layout_marginBottom="175.0px"
+				android:layout_alignParentLeft="true"
+				android:layout_alignParentBottom="true" />
+			
+			<jxtras.mobility.xpress.view.InOutImageButton
+				android:id="@+id/composer_button_music" 
+				android:background="@drawable/composer_music"
+				android:visibility="gone" 
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" 
+				android:layout_marginLeft="178.0px"
+				android:layout_marginBottom="131.0px"
+				android:layout_alignParentLeft="true"
+				android:layout_alignParentBottom="true" />
+			
+			<jxtras.mobility.xpress.view.InOutImageButton
+				android:id="@+id/composer_button_thought" 
+				android:background="@drawable/composer_thought"
+				android:visibility="gone" 
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" 
+				android:layout_marginLeft="206.0px"
+				android:layout_marginBottom="75.0px" 
+				android:layout_alignParentLeft="true"
+				android:layout_alignParentBottom="true" />
+			
+			<jxtras.mobility.xpress.view.InOutImageButton
+				android:id="@+id/composer_button_sleep" 
+				android:background="@drawable/composer_sleep"
+				android:visibility="gone" 
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" 
+				android:layout_marginLeft="216.0px"
+				android:layout_marginBottom="13.0px" 
+				android:layout_alignParentLeft="true"
+				android:layout_alignParentBottom="true" />
+		</jxtras.mobility.xpress.view.InOutRelativeLayout>
+		
+		<jxtras.mobility.xpress.view.InOutRelativeLayout
+			android:id="@+id/composer_buttons_show_hide_button"
+			android:background="@drawable/composer_button_center"
+			android:layout_width="90.0px" 
+			android:layout_height="86.0px"
+			android:layout_alignParentLeft="true"
+			android:layout_alignParentBottom="true">
+			
+			<ImageView 
+				android:id="@+id/composer_buttons_show_hide_button_icon"
+				android:layout_width="wrap_content" 
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="32.0px" 
+				android:layout_marginTop="29.0px"
+				android:src="@drawable/composer_icn_plus" />
+		</jxtras.mobility.xpress.view.InOutRelativeLayout>
+	</jxtras.mobility.xpress.view.ComposerLayout>
+</merge>
