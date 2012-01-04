@@ -21,7 +21,7 @@ import android.view.animation.OvershootInterpolator;
 import android.view.animation.Animation.AnimationListener;
 import android.widget.Toast;
 
-public class ExpandableMenuDemo extends Activity {
+public class ComposerButtonDemo extends Activity {
 
 	private View composerButtonsShowHideButton;
 	private View composerButtonsShowHideButtonIcon;
@@ -95,8 +95,8 @@ public class ExpandableMenuDemo extends Activity {
 		shrinkAnimationOut.setAnimationListener(new AnimationListener() {
 			@Override
 			public void onAnimationEnd(Animation animation) {
-				Intent intent = new Intent(ExpandableMenuDemo.this, MockActivity.class);
-				ExpandableMenuDemo.this.startActivity(intent);
+				Intent intent = new Intent(ComposerButtonDemo.this, MockActivity.class);
+				ComposerButtonDemo.this.startActivity(intent);
 			}
 
 			@Override
