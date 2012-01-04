@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<style name="Theme.WINDOW_NO_TITLE" parent="@android:style/Theme.Black">
+		<item name="android:windowNoTitle">true</item>
+	</style>
+</resources>
